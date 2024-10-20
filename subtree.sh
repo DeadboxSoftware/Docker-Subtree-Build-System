@@ -12,8 +12,8 @@ declare -a folders=(
 )
 
 declare -a repo=(
-	"git@github.com/Backshift/Node-App-Toolset.git"
-	"git@github.com/Backshift/Node-App-Toolset.git"
+	"git@github.com:Backshift/Node-App-Toolset.git"
+	"git@github.com:Backshift/Node-App-Toolset.git"
 )
 
 declare -a branch=(
