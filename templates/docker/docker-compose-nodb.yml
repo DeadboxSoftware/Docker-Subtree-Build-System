@@ -1,0 +1,18 @@
+services:
+  nodeapp:
+    build: ./nodeapp
+    ports:
+      - "${NODEAPP_PORT}:${NODEAPP_PORT}"
+    volumes:
+      - "./nodeapp/app/:/app"
+    networks:
+      docker_subtree:
+        # ipv4_address: ${NODEAPP_IP}
+    restart: ${RESTART}
+    container_name: nodeapp_${ENV_NAME}
+    command: npm run start
+
+networks:
+  default:
+    name: ${NETWORK_NAME}
+    external: true

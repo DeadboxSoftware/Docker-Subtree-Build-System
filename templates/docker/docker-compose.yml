@@ -1,0 +1,33 @@
+services:
+  nodeapp:
+    build: ./nodeapp
+    ports:
+      - "${NODEAPP_PORT}:${NODEAPP_PORT}"
+    volumes:
+      - "./nodeapp/app/:/app"
+    networks:
+      docker_subtree:
+        # ipv4_address: ${NODEAPP_IP}
+    restart: ${RESTART}
+    container_name: nodeapp_${ENV_NAME}
+    command: npm run start
+  # database:
+  #   image: postgres:15
+  #   restart: ${RESTART}
+  #   ports:
+  #     - "${HOST_IP}:${POSTGRES_PORT}:${POSTGRES_PORT}"
+  #   environment:
+  #       - POSTGRES_PASSWORD=${DB_PASSWORD}
+  #       - POSTGRES_DB=demo
+  #       - PGDATA=/var/lib/postgresql/data/pgdata
+  #   volumes:
+  #       - ./postgres/data:/var/lib/postgresql/data
+  #   networks:
+  #     default:
+  #       ipv4_address: ${POSTGRES_IP}
+  #   container_name: postgres_${ENV_NAME}
+
+networks:
+  docker_subtree:
+    name: ${NETWORK_NAME}
+    external: true

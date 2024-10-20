@@ -1,0 +1,69 @@
+{
+    "CORE_MODULES": [
+        {"template_path": "templates/env/template.env", "template_destination": ".env"}
+    ],
+    "ENVMap": {
+        "PROJECT": [
+            {"template_path": "templates/docker/docker-compose.yml", "template_destination": "docker-compose.yml"}
+        ],
+        "PROJECT_NODB": [
+            {"template_path": "templates/docker/docker-compose-nodb.yml", "template_destination": "docker-compose.yml"}
+        ]
+    },
+    "containers": {
+        "nodeapp": [
+            {"template_path": "templates/containers/nodeapp/Dockerfile", "template_destination": "nodeapp/Dockerfile"},
+            {"template_path": "certs/crt.pem", "template_destination": "nodeapp/app/cert/crt.pem"},
+            {"template_path": "certs/csr.pem", "template_destination": "nodeapp/app/cert/csr.pem"},
+            {"template_path": "certs/key.pem", "template_destination": "nodeapp/app/cert/key.pem"}
+        ],
+        "postgres": [
+            {"template_path": "templates/containers/postgres/postgresql.conf", "template_destination": "postgres/config/postgresql.conf"}
+        ]
+    },
+    "environments": {
+        "PROJECT": {
+            "containers": ["nodeapp", "postgres"],
+            "portmap": {
+                "nodeapp": {"port": 8082, "ip": "10.25.0.3", "url": "https://localhost:8000/"},
+                "postgres": {"port": 5432, "ip": "10.25.0.4", "dbname": "demo"}
+            },
+            "glob": {
+                "architechture": "arm",
+                "base_url": "http://localhost",
+                "local_database": "",
+                "host_ip": "127.0.0.1",
+                "debug": "true",
+                "protocol": "https",
+                "docker_network_ip": "10.25.0.0/16",
+                "host_os": "Linux",
+                "env_name": "docker_subtree",
+                "restart": "always",
+                "company": {
+                    "owner": "deadbox"
+                }
+            }
+        },
+        "PROJECT_NODB": {
+            "containers": ["nodeapp"],
+            "portmap": {
+                "nodeapp": {"port": 8082, "ip": "10.25.0.3", "url": "https://localhost:8000/"}
+            },
+            "glob": {
+                "architechture": "arm",
+                "base_url": "http://localhost",
+                "local_database": "",
+                "host_ip": "127.0.0.1",
+                "debug": "true",
+                "protocol": "https",
+                "docker_network_ip": "10.25.0.0/16",
+                "host_os": "Linux",
+                "env_name": "docker_subtree",
+                "restart": "always",
+                "company": {
+                    "owner": "deadbox"
+                }
+            }
+        }
+    }
+}

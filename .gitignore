@@ -1,0 +1,9 @@
+# Core
+.env
+/docker-compose.yml
+certs
+certs/_.txt
+
+# Containers
+/nodeapp
+/postgres
